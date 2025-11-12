@@ -1,29 +1,20 @@
-import './App.css';
+import React from 'react';
+import {Routes, Route, Link} from 'react-router-dom';
+import Home from './pages/Home.jsx';
+import Model_1 from './pages/model_1.jsx';
+import Model_2 from './pages/model_2.jsx';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src="Octocat.png" className="App-logo" alt="logo" />
-        <p>
-          GitHub Codespaces <span className="heart">♥️</span> React
-        </p>
-        <p className="small">
-          Edit <code>src/App.jsx</code> and save to reload.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </p>
-      </header>
-    </div>
+    <>
+     <Routes>
+      <Route path="/" element={<Model_1 />}></Route>
+      <Route path='/model_1' element={<Home />}></Route>
+      <Route path='/model_2' element={<Model_2 />}></Route>
+     </Routes>
+    </>
   );
 }
+
 
 export default App;
