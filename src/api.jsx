@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL || "http://kx8x1l-ip-82-3-162-166.tunnelmole.net"; 
+const API_URL = import.meta.env.VITE_API_URL || "https://kx8x1l-ip-82-3-162-166.tunnelmole.net"; 
 
 export async function getSpeech(features) {
   const response = await fetch(`${API_URL}/speech`, {
