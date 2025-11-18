@@ -22,7 +22,7 @@ export default function Model_1(){
         {/* Sidebar Menu */}
         <Sidebar/>
             <div class="text-center">
-                <h1>Model 1</h1>
+                <h1>Speech Recognition</h1>
             </div>
 
             {/* Load model API */}

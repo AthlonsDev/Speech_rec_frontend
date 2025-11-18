@@ -1,7 +1,18 @@
 import React from "react";
 import { useState } from "react";
+import axios from 'axios';
+
+
 
 const ModalViewText = (data) => {
+
+    const [buckets, setBuckets] = useState([]);
+
+    axios.get("http://10.3.0.75:8000/")
+    .then(res => {
+        setBuckets(res.data);
+    });
+
     return (
         <>
             <div class='mx-auto p-4 text-center'>
@@ -17,7 +28,16 @@ const ModalViewText = (data) => {
                         </div>
                         <div class="modal-body">
                             {/* {data.text ? <div dangerouslySetInnerHTML={{ __html: data.text }} /> : "No Transcription Available"} */}
-
+                              // read from /speech endpoint
+                            {buckets.length > 0 ? (
+                                <ul>
+                                    {buckets.map((bucket, index) => (
+                                        <li key={index}>{bucket}</li>
+                                    ))}
+                                </ul>
+                            ) : (
+                                "No Data Available"
+                            )}
 
                         </div>
                         <div class="modal-footer">

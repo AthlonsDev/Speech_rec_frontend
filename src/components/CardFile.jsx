@@ -2,6 +2,7 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 import ModalViewText from './ModalViewText';
 import { useState } from "react";
+import axios from 'axios';
 import { Document, Packer, Paragraph, TextRun } from "docx";
 
 
@@ -22,14 +23,6 @@ const CardFile = (data) => {
       data.setTranscription(transcription);
     }
   }, [transcription]);
-
-  // read from /speech endpoint
-  const get_list = async () => {
-  const response = await fetch(`${API_URL}/speech`, {
-      method: 'GET',
-      body: formData,
-    });
-  };
 
   // file upload to backend API to be implemented
   const handleUpload = async () => {
