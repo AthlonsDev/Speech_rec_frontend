@@ -23,6 +23,14 @@ const CardFile = (data) => {
     }
   }, [transcription]);
 
+  // read from /speech endpoint
+  const get_list = async () => {
+  const response = await fetch(`${API_URL}/speech`, {
+      method: 'GET',
+      body: formData,
+    });
+  };
+
   // file upload to backend API to be implemented
   const handleUpload = async () => {
     if (!file) return;
@@ -30,7 +38,8 @@ const CardFile = (data) => {
     setLoading(true); // show loading spinner while uploading
     const formData = new FormData();
     formData.append('file', file);
-    const API_URL = import.meta.env.VITE_API_URL || "http://kx8x1l-ip-82-3-162-166.tunnelmole.net";
+    // const API_URL = import.meta.env.VITE_API_URL || "http://kx8x1l-ip-82-3-162-166.tunnelmole.net";
+    const API_URL = import.meta.env.VITE_API_URL || "http://10.3.0.75:8000";
 
    try {
       const response = await fetch(`${API_URL}/speech`, {

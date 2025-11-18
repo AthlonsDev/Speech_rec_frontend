@@ -3,7 +3,7 @@ import { data, Link, useParams } from "react-router-dom";
 import CardFile from "../components/CardFile";
 import CardForm from "../components/CardForm";
 import Sidebar from "../components/Sidebar";
-import { getSpeech } from "../api";
+import { getFiles, getSpeech } from "../api";
 import axios from 'axios'
 import { useEffect, useState } from "react";
 import { use } from "react";
@@ -31,11 +31,12 @@ export default function Model_1(){
 
             <h2 class="text-center mt-4 mb-4">
                 Transcription
+                {/* {getFiles()} */}
             </h2>
 
-            <h8>
+            <p>
                 {transcription ? <div dangerouslySetInnerHTML={{ __html: transcription }} /> : "No Transcription Available"}
-            </h8>
+            </p>
         </>
     );
 };
