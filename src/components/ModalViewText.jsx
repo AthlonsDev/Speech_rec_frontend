@@ -6,12 +6,30 @@ import axios from 'axios';
 
 const ModalViewText = (data) => {
 
-    const [buckets, setBuckets] = useState([]);
-
-    axios.get("http://10.3.0.75:8000/")
-    .then(res => {
-        setBuckets(res.data);
-    });
+    const handleClick = (item) => {
+        // send  request to backend to download file
+        return async () => {
+            try {
+                const API_URL = import.meta.env.VITE_API_URL || "http://10.3.0.75:8000";
+                const response = await fetch(`${API_URL}/download/${encodeURIComponent(item)}`);
+                if (!response.ok) {
+                    throw new Error('File download failed');
+                }
+                const blob = await response.blob();
+                // create a link to download the file
+                const url = window.URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', item); //or any other extension
+                link.download = item;
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
+            } catch (error) {
+                console.error('Error downloading file:', error);
+            }
+        };
+    }
 
     return (
         <>
@@ -27,17 +45,21 @@ const ModalViewText = (data) => {
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            {/* {data.text ? <div dangerouslySetInnerHTML={{ __html: data.text }} /> : "No Transcription Available"} */}
-                              // read from /speech endpoint
-                            {buckets.length > 0 ? (
-                                <ul>
-                                    {buckets.map((bucket, index) => (
-                                        <li key={index}>{bucket}</li>
-                                    ))}
-                                </ul>
+                            {data.text.length > 0 ? (
+                                data.text.map((item, index) => (
+                                    <div key={index} class='mb-3 p-2 border'>
+                                        <p>{item}</p>
+                                        <button 
+                                            type='button'
+                                            class='btn btn-outline-secondary btn-sm'
+                                            onClick={handleClick(item)}>
+                                                Download
+                                        </button>
+                                     </div>
+                                ))
                             ) : (
-                                "No Data Available"
-                            )}
+                                "No Transcription Available"
+                                )}
 
                         </div>
                         <div class="modal-footer">

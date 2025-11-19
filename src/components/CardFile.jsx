@@ -11,6 +11,7 @@ const CardFile = (data) => {
   const [file, setFile] = useState(null);
   const [transcription, setTrascription] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [buckets, setBuckets] = useState([]);
   
 // handle file input change
   const handleFileChange = (event) => {
@@ -23,6 +24,13 @@ const CardFile = (data) => {
       data.setTranscription(transcription);
     }
   }, [transcription]);
+
+  React.useEffect(() => {
+    axios.get("http://10.3.0.75:8000/")
+    .then(res => {
+        setBuckets(res.data);
+    });
+  }, []);
 
   // file upload to backend API to be implemented
   const handleUpload = async () => {
@@ -104,7 +112,7 @@ const CardFile = (data) => {
               }
           <div class='container'>
               <div class='text-center'>
-                <ModalViewText text={transcription}/>
+                <ModalViewText text={buckets}/>
                 <button type='button' class='btn btn-outline-primary' onClick={saveDoc}>Save</button>
               </div>
           </div>
