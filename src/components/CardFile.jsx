@@ -6,22 +6,28 @@ import axios from 'axios';
 import { Document, Packer, Paragraph, TextRun } from "docx";
 
 
-const CardFile = (data) => {
+const CardFile = ({ onSend }) => {
 
   const [file, setFile] = useState(null);
   const [transcription, setTrascription] = useState(null);
   const [loading, setLoading] = useState(false);
   const [buckets, setBuckets] = useState([]);
+  const [modelType, setModelType] = useState(null);
+
   
 // handle file input change
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
   }
 
+  const handleClickEvent = (event) => {
+    setModelType(event.target.innerText)
+  }
+
   // send data to parent component
   React.useEffect(() => {
     if (transcription) {
-      data.setTranscription(transcription);
+      setTrascription(transcription);
     }
   }, [transcription]);
 
@@ -35,8 +41,13 @@ const CardFile = (data) => {
   // file upload to backend API to be implemented
   const handleUpload = async () => {
     if (!file) return;
+    if (modelType == null) {
+      console.log('select modeltype')
+      return;
+    }
 
     setLoading(true); // show loading spinner while uploading
+    onSend(modelType)
     const formData = new FormData();
     formData.append('file', file);
     // const API_URL = import.meta.env.VITE_API_URL || "http://kx8x1l-ip-82-3-162-166.tunnelmole.net";
@@ -62,40 +73,6 @@ const CardFile = (data) => {
       console.error('Error uploading file:', error); // expects a JSON response with transcription
     }
   };
-  
-  const generateDoc = () => {
-    const segments = transcription.split('<br/>');
-    const paragraph = new Paragraph({
-        children: segments.flatMap((segment, i) => [
-            new TextRun(segment),
-            ...(i < segments.length - 1 ? [new TextRun({ break: 1 })] : [])
-        ]),
-    });
-    const doc = new Document({
-      sections: [{
-        properties: {},
-        children: [
-          paragraph,
-        ],
-      }],
-    });
-    return doc;
-  };
-
-  const saveDoc = async () => {
-    
-    const doc = generateDoc();
-    const buffer = await Packer.toBlob(doc);
-
-    const url = window.URL.createObjectURL(buffer)
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = "transcription.docx";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    window.URL.removeObjectURL(url);
-  };
 
   return (
     <Card className="shadow-sm">
@@ -113,7 +90,9 @@ const CardFile = (data) => {
           <div class='container'>
               <div class='text-center'>
                 <ModalViewText text={buckets}/>
-                <button type='button' class='btn btn-outline-primary' onClick={saveDoc}>Save</button>
+                <button type='button' class='btn btn-outline-primary' onClick={handleClickEvent}>Notes</button>
+                <button type='button' class='btn btn-outline-primary' onClick={handleClickEvent}>Meeting</button>
+
               </div>
           </div>
       </Card.Body>
