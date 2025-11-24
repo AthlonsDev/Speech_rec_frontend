@@ -40,6 +40,10 @@ const CardFile = ({ onSend }) => {
 
   // file upload to backend API to be implemented
   const handleUpload = async () => {
+    if (onSend) {
+      onSend(inputValue, modelType);
+    }
+
     if (!file) return;
     if (modelType == null) {
       console.log('select modeltype')
@@ -47,15 +51,14 @@ const CardFile = ({ onSend }) => {
     }
 
     setLoading(true); // show loading spinner while uploading
-    onSend(modelType)
     const formData = new FormData();
-    formData.append('file', file);
+    formData.append('file', file, modelType);
     // const API_URL = import.meta.env.VITE_API_URL || "http://kx8x1l-ip-82-3-162-166.tunnelmole.net";
     const API_URL = import.meta.env.VITE_API_URL || "http://10.3.0.75:8000";
 
    try {
       const response = await fetch(`${API_URL}/speech`, {
-        method: 'POST',
+        method: "POST",
         body: formData,
       });
 
@@ -90,8 +93,8 @@ const CardFile = ({ onSend }) => {
           <div class='container'>
               <div class='text-center'>
                 <ModalViewText text={buckets}/>
-                <button type='button' class='btn btn-outline-primary' onClick={handleClickEvent}>Notes</button>
-                <button type='button' class='btn btn-outline-primary' onClick={handleClickEvent}>Meeting</button>
+                <button class={`btn btn-outline-success ${modelType === 'Notes' ? 'active' : ''}`} data-bs-toggle="button" aria-selected={modelType === "Notes"} onClick={handleClickEvent}>Notes</button>
+                <button class={`btn btn-outline-success ${modelType === 'Meeting' ? 'active' : ''}`} data-bs-toggle="button" aria-selected={modelType === "Meeting"} onClick={handleClickEvent}>Meeting</button>
 
               </div>
           </div>
