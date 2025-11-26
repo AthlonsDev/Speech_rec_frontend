@@ -1,5 +1,5 @@
 // const API_URL = import.meta.env.VITE_API_URL || "https://kx8x1l-ip-82-3-162-166.tunnelmole.net"; 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000/";
+const API_URL = import.meta.env.VITE_API_URL || "http://35.179.117.140:8000";
 
 export async function getFiles() {
   fetch(`${API_URL}/speech`)

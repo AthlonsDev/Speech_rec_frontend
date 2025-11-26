@@ -31,7 +31,7 @@ const CardFile = ({ onSend }) => {
   }, [transcription]);
 
   React.useEffect(() => {
-    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+    const API_URL = import.meta.env.VITE_API_URL || "http://35.179.117.140:8000";
     axios.get(`${API_URL}/`)
     .then(res => {
         setBuckets(res.data);
@@ -59,8 +59,8 @@ const CardFile = ({ onSend }) => {
     for (let pair of formData.entries()) {
       console.log(pair[0], pair[1]);
     }
-    // const API_URL = import.meta.env.VITE_API_URL || "http://kx8x1l-ip-82-3-162-166.tunnelmole.net";
-    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+    const API_URL = import.meta.env.VITE_API_URL || "35.179.117.140:8000";
+    // const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
    try {
       const response = await fetch(`${API_URL}/speech`, {
