@@ -3,7 +3,6 @@ import { Card } from 'react-bootstrap';
 import ModalViewText from './ModalViewText';
 import { useState } from "react";
 import axios from 'axios';
-import { Document, Packer, Paragraph, TextRun } from "docx";
 
 
 const CardFile = ({ onSend }) => {
@@ -21,7 +20,7 @@ const CardFile = ({ onSend }) => {
   }
 
   const handleClickEvent = (event) => {
-    setModelType(event.target.innerText)
+    setModelType(event.target.innerText);
   }
 
   // send data to parent component
@@ -44,10 +43,6 @@ const CardFile = ({ onSend }) => {
 
   // file upload to backend API to be implemented
   const handleUpload = async () => {
-    // if (onSend) {
-    //   onSend(inputValue, modelType);
-    // }
-
     if (!file) return;
     // if (modelType == null) {
     //   console.log('select modeltype')
@@ -56,8 +51,14 @@ const CardFile = ({ onSend }) => {
 
     setLoading(true); // show loading spinner while uploading
     const formData = new FormData();
-    console.log('filename:', file)
+    console.log('modelType:', modelType);
     formData.append('file', file);
+    formData.append('model_type', modelType);
+        // Debug: Log FormData contents
+    console.log('FormData contents:');
+    for (let pair of formData.entries()) {
+      console.log(pair[0], pair[1]);
+    }
     // const API_URL = import.meta.env.VITE_API_URL || "http://kx8x1l-ip-82-3-162-166.tunnelmole.net";
     const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
@@ -99,7 +100,7 @@ const CardFile = ({ onSend }) => {
               <div class='text-center'>
                 <ModalViewText text={buckets}/>
                 <button class={`btn btn-outline-success ${modelType === 'Notes' ? 'active' : ''}`} data-bs-toggle="button" aria-selected={modelType === "Notes"} onClick={handleClickEvent}>Notes</button>
-                <button class={`btn btn-outline-success ${modelType === 'Meeting' ? 'active' : ''}`} data-bs-toggle="button" aria-selected={modelType === "Meeting"} onClick={handleClickEvent}>Meeting</button>
+                <button class={`btn btn-outline-success ${modelType === 'Meeting' ? 'active' : ''}`} data-bs-toggle="button" aria-selected={modelType === "Meeting(inprogress)"} onClick={handleClickEvent}>Meeting</button>
 
               </div>
           </div>
