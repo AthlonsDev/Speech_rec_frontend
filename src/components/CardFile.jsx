@@ -32,29 +32,34 @@ const CardFile = ({ onSend }) => {
   }, [transcription]);
 
   React.useEffect(() => {
-    axios.get("http://10.3.0.75:8000/")
+    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+    axios.get(`${API_URL}/`)
     .then(res => {
         setBuckets(res.data);
+    })
+    .catch(err => {
+        console.error('Error fetching buckets:', err);
     });
   }, []);
 
   // file upload to backend API to be implemented
   const handleUpload = async () => {
-    if (onSend) {
-      onSend(inputValue, modelType);
-    }
+    // if (onSend) {
+    //   onSend(inputValue, modelType);
+    // }
 
     if (!file) return;
-    if (modelType == null) {
-      console.log('select modeltype')
-      return;
-    }
+    // if (modelType == null) {
+    //   console.log('select modeltype')
+    //   return;
+    // }
 
     setLoading(true); // show loading spinner while uploading
     const formData = new FormData();
-    formData.append('file', file, modelType);
+    console.log('filename:', file)
+    formData.append('file', file);
     // const API_URL = import.meta.env.VITE_API_URL || "http://kx8x1l-ip-82-3-162-166.tunnelmole.net";
-    const API_URL = import.meta.env.VITE_API_URL || "http://10.3.0.75:8000";
+    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
    try {
       const response = await fetch(`${API_URL}/speech`, {

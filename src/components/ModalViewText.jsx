@@ -10,7 +10,7 @@ const ModalViewText = (data) => {
         // send  request to backend to download file
         return async () => {
             try {
-                const API_URL = import.meta.env.VITE_API_URL || "http://10.3.0.75:8000";
+                const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
                 const response = await fetch(`${API_URL}/download/${encodeURIComponent(item)}`);
                 if (!response.ok) {
                     throw new Error('File download failed');
@@ -53,12 +53,12 @@ const ModalViewText = (data) => {
                                             type='button'
                                             class='btn btn-outline-secondary btn-sm'
                                             onClick={handleClick(item)}>
-                                                Download
+                                                Download 
                                         </button>
                                      </div>
                                 ))
                             ) : (
-                                "No Transcription Available"
+                                "No Transcriptions Available"
                                 )}
 
                         </div>
