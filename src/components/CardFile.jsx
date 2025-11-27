@@ -31,7 +31,7 @@ const CardFile = ({ onSend }) => {
   }, [transcription]);
 
   React.useEffect(() => {
-    const API_URL = import.meta.env.VITE_API_URL || "http://13.40.107.140:8000";
+    const API_URL = import.meta.env.VITE_API_URL || "https://13.40.107.140:8000";
     axios.get(`${API_URL}/`)
     .then(res => {
         setBuckets(res.data);
@@ -59,7 +59,7 @@ const CardFile = ({ onSend }) => {
     for (let pair of formData.entries()) {
       console.log(pair[0], pair[1]);
     }
-    const API_URL = import.meta.env.VITE_API_URL || "http://13.40.107.140:8000";
+    const API_URL = import.meta.env.VITE_API_URL || "https://13.40.107.140:8000";
     // const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
    try {
