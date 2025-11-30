@@ -11,7 +11,7 @@ const CardFile = ({ onSend }) => {
   const [transcription, setTrascription] = useState(null);
   const [loading, setLoading] = useState(false);
   const [buckets, setBuckets] = useState([]);
-  const [modelType, setModelType] = useState(null);
+  const [modelType, setModelType] = useState('Notes');
 
   
 // handle file input change
@@ -86,10 +86,12 @@ const CardFile = ({ onSend }) => {
   return (
     <Card className="shadow-sm">
       <Card.Body>
-        <Card.Title class='text-center'>Upload File</Card.Title>
+        <Card.Title class='text-center'>
+          <h3>Upload File</h3>
+          </Card.Title>
           <div class="hstack gap-5 justify-content-center">
             <input class="form-control" type="file" id="formFile" onChange={handleFileChange}/>
-            <button type='button ' class='btn btn-outline-secondary' onClick={handleUpload}>Upload</button>
+            <button type='button ' class='btn btn-outline-success btn-lg' onClick={handleUpload}>Upload</button>
           </div>
               {loading &&
                 <div class="d-flex justify-content-center">
@@ -99,9 +101,11 @@ const CardFile = ({ onSend }) => {
           <div class='container'>
               <div class='text-center'>
                 <ModalViewText text={buckets}/>
-                <button class={`btn btn-outline-success ${modelType === 'Notes' ? 'active' : ''}`} data-bs-toggle="button" aria-selected={modelType === "Notes"} onClick={handleClickEvent}>Notes</button>
-                <button class={`btn btn-outline-success ${modelType === 'Meeting' ? 'active' : ''}`} data-bs-toggle="button" aria-selected={modelType === "Meeting(inprogress)"} onClick={handleClickEvent}>Meeting</button>
-
+                <h4 class='mt-4 mb-3'>Select Model Type</h4>
+              <div class="hstack gap-5 justify-content-center">
+                <button class={`btn btn-outline-success active ${modelType === 'Notes' ? 'active' : ''}`} data-bs-toggle="button" aria-selected={modelType === "Notes"} onClick={handleClickEvent}>Notes</button>
+                <button class={`btn btn-outline-success ${modelType === 'Meeting' ? 'active' : ''}`} data-bs-toggle="button" aria-selected={modelType === "Meeting"} onClick={handleClickEvent}>Meeting</button>
+              </div>
               </div>
           </div>
       </Card.Body>
