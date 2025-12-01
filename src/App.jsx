@@ -3,12 +3,14 @@ import {Routes, Route, Link} from 'react-router-dom';
 import Home from './pages/Home.jsx';
 import Model_1 from './pages/model_1.jsx';
 import Model_2 from './pages/model_2.jsx';
+import Auth from './pages/auth.jsx';
 
 function App() {
   return (
     <>
      <Routes>
       <Route path="/" element={<Model_1 />}></Route>
+      <Route path="/auth" element={<Auth />}></Route>
       <Route path='/model_1' element={<Home />}></Route>
       <Route path='/model_2' element={<Model_2 />}></Route>
      </Routes>

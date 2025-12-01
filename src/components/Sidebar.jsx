@@ -23,13 +23,18 @@ const Sidebar = () =>  {
                         <Link to="/">Home</Link>
                     </div>
                     <div class="p-2" data-bs-dismiss="offcanvas">
+                        {/* <button type='button' class="btn btn-link">Button 1</button> */}
+                        <img src={home} alt='' width='45' height='45'/>
+                        <Link to="/auth">Login</Link>
+                    </div>
+                    {/* <div class="p-2" data-bs-dismiss="offcanvas">
                         <img src={speech} alt='' width='45' height='45'/>
                         <Link to="/model_1">Speech Recognition</Link>
                     </div>
                         <div class="p-2" data-bs-dismiss="offcanvas">
                         <img src={speech} alt='' width='45' height='45'/>
                         <Link to="/model_2">Data Visualization and Prediction</Link>
-                    </div>
+                    </div> */}
                     </div>
                 </div>
             </div>

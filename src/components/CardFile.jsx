@@ -5,7 +5,7 @@ import { useState } from "react";
 import axios from 'axios';
 
 
-const CardFile = ({ onSend }) => {
+const CardFile = () => {
 
   const [file, setFile] = useState(null);
   const [transcription, setTrascription] = useState(null);
@@ -31,7 +31,7 @@ const CardFile = ({ onSend }) => {
   }, [transcription]);
 
   React.useEffect(() => {
-    const API_URL = import.meta.env.VITE_API_URL || "https://isz1kwk4y1.execute-api.eu-west-2.amazonaws.com";
+    const API_URL = import.meta.env.VITE_API_URL || "https://m67kummn2c.execute-api.eu-west-2.amazonaws.com/test1";
     axios.get(`${API_URL}/`)
     .then(res => {
         setBuckets(res.data);
@@ -59,8 +59,8 @@ const CardFile = ({ onSend }) => {
     for (let pair of formData.entries()) {
       console.log(pair[0], pair[1]);
     }
-    // const API_URL = import.meta.env.VITE_API_URL || "https://s5fzof-ip-13-40-107-140.tunnelmole.net";
-  const API_URL = import.meta.env.VITE_API_URL || "https://isz1kwk4y1.execute-api.eu-west-2.amazonaws.com";
+    const API_URL = import.meta.env.VITE_API_URL || "https://m67kummn2c.execute-api.eu-west-2.amazonaws.com/test1"; //Development Gateway
+  // const API_URL = import.meta.env.VITE_API_URL || "https://isz1kwk4y1.execute-api.eu-west-2.amazonaws.com";  #Production Gateway
 
    try {
       const response = await fetch(`${API_URL}/speech`, {
