@@ -4,7 +4,7 @@ import axios from 'axios';
 
 
 
-const ModalViewText = (data) => {
+const ModalViewText = ({ text = [] }) => {
 
     const handleClick = (item) => {
         // send  request to backend to download file
@@ -34,7 +34,7 @@ const ModalViewText = (data) => {
     return (
         <>
             <div class='mx-auto p-4 text-center'>
-                <button type='button' class='btn btn-outline-primary' data-bs-toggle="modal" data-bs-target="#staticBackdrop">View Your Transcriptions</button>
+                <button type='button' class='btn btn-outline-primary' data-bs-toggle="modal" data-bs-target="#staticBackdrop">View</button>
             </div>
 
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -45,8 +45,8 @@ const ModalViewText = (data) => {
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            {data.text.length > 0 ? (
-                                data.text.map((item, index) => (
+                            {Array.isArray(text) && text.length > 0 ? (
+                                text.map((item, index) => (
                                     <div key={index} class='mb-3 p-2 border'>
                                         <p>{item}</p>
                                         <button 
