@@ -61,7 +61,7 @@ export default function Model_1(){
                 <li><strong>Meeting Transcription:</strong> Designed for multi-speaker audio, such as business meetings or conferences.</li>
             </ul>
             <h3>
-                Disclaimer
+                Note
             </h3>
             <p>
                 This model is running in a testing environment, so the processing of the audio files is still quite slow.
