@@ -10,7 +10,7 @@ const ModalViewText = ({ text = [] }) => {
         // send  request to backend to download file
         return async () => {
             try {
-                const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+                const API_URL = import.meta.env.VITE_API_URL || "https://m67kummn2c.execute-api.eu-west-2.amazonaws.com/test1";
                 const response = await fetch(`${API_URL}/download/${encodeURIComponent(item)}`);
                 if (!response.ok) {
                     throw new Error('File download failed');
