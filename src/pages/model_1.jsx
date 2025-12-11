@@ -20,7 +20,7 @@ export default function Model_1(){
     return(
         <>
         {/* Sidebar Menu */}
-        <Sidebar/>
+        {/* <Sidebar/> */}
             <div class="text-center">
                 <h1>Speech Recognition</h1>
             </div>
