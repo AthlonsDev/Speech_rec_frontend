@@ -13,7 +13,6 @@ const CardFile = ({ onSend }) => {
   const [buckets, setBuckets] = useState([]);
   const [modelType, setModelType] = useState('Notes');
   const [started, setStarted] = useState(false);
-  const [stopped, setStopped] = useState(false);
 
   
 // handle file input change
@@ -129,8 +128,6 @@ const CardFile = ({ onSend }) => {
                 <ModalViewText text={buckets}/>
                 <h4 class='mt-4 mb-3'>Select Model Type</h4>
               <div class="hstack gap-5 justify-content-center">
-                {/* <button onClick={handleStart}>Start</button> */}
-                {/* <button className='btn btn-outline-danger' onClick={handleStop}>Stop</button> */}
                 <button class={`btn btn-outline-success active ${modelType === 'Notes' ? 'active' : ''}`} data-bs-toggle="button" aria-selected={modelType === "Notes"} onClick={handleClickEvent}>Notes</button>
                 <button class={`btn btn-outline-success ${modelType === 'Meeting' ? 'active' : ''}`} data-bs-toggle="button" aria-selected={modelType === "Meeting"} onClick={handleClickEvent}>Meeting</button>
               </div>

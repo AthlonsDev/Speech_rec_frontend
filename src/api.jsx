@@ -1,5 +1,4 @@
-// const API_URL = import.meta.env.VITE_API_URL || "https://s5fzof-ip-13-40-107-140.tunnelmole.net"; 
-const API_URL = import.meta.env.VITE_API_URL || "https://sjuwom5xfc.execute-api.eu-west-2.amazonaws.com/";
+const API_URL = import.meta.env.VITE_API_URL || "https://m67kummn2c.execute-api.eu-west-2.amazonaws.com/test1";
 
 export async function getFiles() {
   fetch(`${API_URL}/speech`)

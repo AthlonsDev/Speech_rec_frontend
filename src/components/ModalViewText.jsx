@@ -4,13 +4,13 @@ import axios from 'axios';
 
 
 
-const ModalViewText = (data) => {
+const ModalViewText = ({ text = [] }) => {
 
     const handleClick = (item) => {
         // send  request to backend to download file
         return async () => {
             try {
-                const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+                const API_URL = import.meta.env.VITE_API_URL || "https://m67kummn2c.execute-api.eu-west-2.amazonaws.com/test1";
                 const response = await fetch(`${API_URL}/download/${encodeURIComponent(item)}`);
                 if (!response.ok) {
                     throw new Error('File download failed');
@@ -45,8 +45,8 @@ const ModalViewText = (data) => {
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            {data.text.length > 0 ? (
-                                data.text.map((item, index) => (
+                            {Array.isArray(text) && text.length > 0 ? (
+                                text.map((item, index) => (
                                     <div key={index} class='mb-3 p-2 border'>
                                         <p>{item}</p>
                                         <button 
