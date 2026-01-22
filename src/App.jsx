@@ -9,7 +9,7 @@ function App() {
   return (
     <>
      <Routes>
-      <Route path="/" element={<Splash />}></Route>
+      <Route path="/" element={<Model_1 />}></Route>
       <Route path='/model_1' element={<Model_1 />}></Route>
       <Route path='/model_2' element={<Model_2 />}></Route>
      </Routes>
