@@ -3,14 +3,14 @@ import { Card } from 'react-bootstrap';
 import ModalViewText from './ModalViewText';
 import ModalTranscriptionView from './ModalTranscriptionView';
 import { useState } from "react";
-import { getRoot } from '../api';
-import { saveDocument } from '../api';
+import { downloadDocument, getRoot } from '../api';
 import axios from 'axios';
 
 
 const CardFile = ({ onSend }) => {
 
   const [file, setFile] = useState(null);
+
   const [transcription, setTrascription] = useState(null);
   const [loading, setLoading] = useState(false);
   const [buckets, setBuckets] = useState([]);
@@ -105,8 +105,17 @@ const CardFile = ({ onSend }) => {
   const saveDoc = async () => {
     async function fetchAndSave() {
       try {
-        const blob = await saveDocument(transcription);
-        console.log('Document saved, preparing download...');
+        const blob = await downloadDocument(file.name + '.docx');
+        console.log('Document saved, preparing download...', file.name);
+        // create a link to download the file
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', file.name + '.docx'); //or any other extension
+        link.download = file.name + '.docx';
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
       } catch (error) {
         console.error('Error saving document:', error);
       }

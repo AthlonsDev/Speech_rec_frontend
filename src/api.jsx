@@ -21,13 +21,13 @@ export async function getSpeech(features) {
 
 }
 
-export async function saveDocument(transcription) {
-  const response = await fetch(`${API_URL}/save_document`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ transcription }),
-  });
-  return await response.blob();
+export async function downloadDocument(filename) {
+  const response = await fetch(`${API_URL}/download/${filename}`);
+  if (!response.ok) {
+    throw new Error('Document download failed');
+  } else {
+    return await response.blob();
+  }
 }
 
 
