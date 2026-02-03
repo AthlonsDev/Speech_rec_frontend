@@ -1,7 +1,7 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "Speech_rec_frontend",
-	"main": "./src/workers/index.ts",
+	"name": "speech",
+	"main": "./src/workers/index.js",
 	"compatibility_date": "2025-10-08",
 	"compatibility_flags": ["nodejs_compat"],
 	"observability": {

@@ -15,6 +15,7 @@
     "react-bootstrap": "^2.10.10",
     "react-dom": "^18.2.0",
     "react-router-dom": "^7.9.6",
+    "vite-plugin-cloudflare": "^0.4.1",
     "web-vitals": "^3.1.0"
   },
   "overrides": {
