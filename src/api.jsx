@@ -1,4 +1,9 @@
-const API_URL = import.meta.env.VITE_API_URL || "https://m67kummn2c.execute-api.eu-west-2.amazonaws.com/test1";
+const API_URL = import.meta.env.VITE_API_URL || "http://10.3.0.68:8000";
+
+export async function getRoot() {
+  const response =  await fetch(`${API_URL}/`);
+  return await response.json();
+}
 
 export async function getFiles() {
   fetch(`${API_URL}/speech`)
@@ -15,6 +20,19 @@ export async function getSpeech(features) {
   return await response.text();
 
 }
+
+export async function downloadDocument(filename) {
+  const response = await fetch(`${API_URL}/download/${filename}`);
+  if (!response.ok) {
+    throw new Error('Document download failed');
+  } else {
+    return await response.blob();
+  }
+}
+
+
+
+
 
 export async function getSearch(features) {
   const response = await fetch(`${API_URL}/search`, {
