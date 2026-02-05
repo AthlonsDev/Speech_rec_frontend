@@ -1,4 +1,5 @@
-const API_URL = import.meta.env.VITE_API_URL || "http://10.3.0.68:8000";
+// const API_URL = import.meta.env.VITE_API_URL || "http://10.3.0.68:8000"; #local
+const API_URL = import.meta.env.VITE_API_URL || "https://fall-unavailable-resistant-moving.trycloudflare.com"; //using temp cloudlfare tunnel
 
 export async function getRoot() {
   const response =  await fetch(`${API_URL}/`);

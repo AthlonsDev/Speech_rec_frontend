@@ -7,10 +7,12 @@ import axios from 'axios';
 const ModalViewText = ({ text = [] }) => {
 
     const handleClick = (item) => {
+        item = item.replace('.wav', ''); // Replace spaces with underscores for URL encoding
+        console.log('Clicked item:', item);
         // send  request to backend to download file
         return async () => {
             try {
-                const API_URL = import.meta.env.VITE_API_URL || "https://m67kummn2c.execute-api.eu-west-2.amazonaws.com/test1";
+                const API_URL = import.meta.env.VITE_API_URL || "https://fall-unavailable-resistant-moving.trycloudflare.com";
                 const response = await fetch(`${API_URL}/download/${encodeURIComponent(item)}`);
                 if (!response.ok) {
                     throw new Error('File download failed');
@@ -26,7 +28,7 @@ const ModalViewText = ({ text = [] }) => {
                 link.click();
                 link.remove();
             } catch (error) {
-                console.error('Error downloading file:', error);
+                console.error('Error downloading file:', item, error);
             }
         };
     }

@@ -77,8 +77,8 @@ const CardFile = ({ onSend }) => {
     for (let pair of formData.entries()) {
       console.log(pair[0], pair[1]);
     }
-    // const API_URL = import.meta.env.VITE_API_URL || "https://s5fzof-ip-13-40-107-140.tunnelmole.net";
-  const API_URL = import.meta.env.VITE_API_URL || "http://10.3.0.68:8000";
+  const API_URL = import.meta.env.VITE_API_URL || "https://fall-unavailable-resistant-moving.trycloudflare.com"; //using temp cloudlfare tunnel
+  // const API_URL = import.meta.env.VITE_API_URL || "http://10.3.0.68:8000";
 
 
    try {
@@ -105,14 +105,15 @@ const CardFile = ({ onSend }) => {
   const saveDoc = async () => {
     async function fetchAndSave() {
       try {
-        const blob = await downloadDocument(file.name + '.docx');
-        console.log('Document saved, preparing download...', file.name);
+        const filename = file.name.replace('.wav', ''); // Replace spaces with underscores for URL encoding
+        const blob = await downloadDocument('docs/' +filename + '.docx');
+        console.log('Document saved, preparing download...', filename);
         // create a link to download the file
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.setAttribute('download', file.name + '.docx'); //or any other extension
-        link.download = file.name + '.docx';
+        link.setAttribute('download', filename + '.docx'); //or any other extension
+        link.download = filename + '.docx';
         document.body.appendChild(link);
         link.click();
         link.remove();
