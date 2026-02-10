@@ -3,8 +3,9 @@ import { Card } from 'react-bootstrap';
 import ModalViewText from './ModalViewText';
 import ModalTranscriptionView from './ModalTranscriptionView';
 import { useState } from "react";
-import { downloadDocument, getRoot } from '../api';
+import { downloadDocument, getRoot, getBuckets, uploadFile } from '../api';
 import axios from 'axios';
+import { Modal } from 'bootstrap/dist/js/bootstrap.bundle.min';
 
 
 const CardFile = ({ onSend }) => {
@@ -15,7 +16,6 @@ const CardFile = ({ onSend }) => {
   const [loading, setLoading] = useState(false);
   const [buckets, setBuckets] = useState([]);
   const [modelType, setModelType] = useState('Notes');
-  const [started, setStarted] = useState(false);
 
   
 // handle file input change
@@ -48,23 +48,18 @@ const CardFile = ({ onSend }) => {
     }
   }, [transcription]);
 
-  // React.useEffect(() => {
-  //   const API_URL = import.meta.env.VITE_API_URL || "https://m67kummn2c.execute-api.eu-west-2.amazonaws.com/test1";
-  //   axios.get(`${API_URL}/buckets`)
-  //   .then(res => {
-  //       // console.log('Fetched buckets:', res.data);
-  //       setBuckets(res.data || []);
-  //       // console.log('Buckets state set to:', res.data || []);
-  //       console.log('first bucket:', (res.data[0]));
-  //   })
-  //   .catch(err => {
-  //       console.error('Error fetching buckets:', err);
-  //   });
-  // }, []);
+  React.useEffect(() => {
+    const res = getBuckets()
+    .then(data => {
+      console.log('Buckets fetched successfully:', data);
+      setBuckets(data);
+    })
+    .catch(error => {
+      console.error('Error fetching buckets:', error);
+    });
+  }, []);
 
 
-
-  // file upload to backend API to be implemented
   const handleUpload = async () => {
     if (!file) return;
     setLoading(true); // show loading spinner while uploading
@@ -77,21 +72,16 @@ const CardFile = ({ onSend }) => {
     for (let pair of formData.entries()) {
       console.log(pair[0], pair[1]);
     }
-  const API_URL = import.meta.env.VITE_API_URL || "https://fall-unavailable-resistant-moving.trycloudflare.com"; //using temp cloudlfare tunnel
-  // const API_URL = import.meta.env.VITE_API_URL || "http://10.3.0.68:8000";
 
-
+    // Upload file to backend and get transcription response
    try {
-      const response = await fetch(`${API_URL}/speech`, {
-        method: "POST",
-        body: formData,
+      const data = await uploadFile(file, modelType)
+      .then(res => res)
+      .catch(err => {
+        console.error('Error uploading file:', err);
+        throw err; // re-throw to be caught by outer catch
       });
-
-      if (!response.ok) {
-        throw new Error('File upload failed');
-      }
-
-      const data = await response.text();
+      
       setTrascription(data);
       setLoading(false);
       console.log('File uploaded successfully:', data);
@@ -142,11 +132,8 @@ const CardFile = ({ onSend }) => {
           <div class='container'>
               <div class='text-center'>
                 {/* <ModalViewText text={buckets}/> */}
-                <ModalTranscriptionView text={transcription}/>
-                <button class='btn btn-outline-success mt-4' 
-                  onClick={() => {
-                    saveDoc()
-                  }}>Save Word Document</button>
+                {/* <ModalTranscriptionView text={transcription}/> */}
+                <ModalViewText text={buckets}/>
                 <h4 class='mt-4 mb-3'>Select Model Type</h4>
               <div class="hstack gap-5 justify-content-center">
                 <button class={`btn btn-outline-success active ${modelType === 'Notes' ? 'active' : ''}`} data-bs-toggle="button" aria-selected={modelType === "Notes"} onClick={handleClickEvent}>Notes</button>

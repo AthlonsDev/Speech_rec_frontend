@@ -4,15 +4,13 @@ import axios from 'axios';
 
 
 
-const ModalViewText = ({ text = [] }) => {
+const ModalViewText = (data) => {
 
     const handleClick = (item) => {
-        item = item.replace('.wav', ''); // Replace spaces with underscores for URL encoding
-        console.log('Clicked item:', item);
         // send  request to backend to download file
         return async () => {
             try {
-                const API_URL = import.meta.env.VITE_API_URL || "https://fall-unavailable-resistant-moving.trycloudflare.com";
+                const API_URL = import.meta.env.VITE_API_URL || "https://m67kummn2c.execute-api.eu-west-2.amazonaws.com/test1";
                 const response = await fetch(`${API_URL}/download/${encodeURIComponent(item)}`);
                 if (!response.ok) {
                     throw new Error('File download failed');
@@ -28,7 +26,7 @@ const ModalViewText = ({ text = [] }) => {
                 link.click();
                 link.remove();
             } catch (error) {
-                console.error('Error downloading file:', item, error);
+                console.error('Error downloading file:', error);
             }
         };
     }
@@ -36,7 +34,7 @@ const ModalViewText = ({ text = [] }) => {
     return (
         <>
             <div class='mx-auto p-4 text-center'>
-                <button type='button' class='btn btn-outline-primary' data-bs-toggle="modal" data-bs-target="#staticBackdrop">Documents</button>
+                <button type='button' class='btn btn-outline-primary' data-bs-toggle="modal" data-bs-target="#staticBackdrop">View</button>
             </div>
 
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -47,8 +45,8 @@ const ModalViewText = ({ text = [] }) => {
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            {Array.isArray(text) && text.length > 0 ? (
-                                text.map((item, index) => (
+                            {data.text.length > 0 ? (
+                                data.text.map((item, index) => (
                                     <div key={index} class='mb-3 p-2 border'>
                                         <p>{item}</p>
                                         <button 

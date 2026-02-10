@@ -1,5 +1,5 @@
-// const API_URL = import.meta.env.VITE_API_URL || "http://10.3.0.68:8000"; #local
-const API_URL = import.meta.env.VITE_API_URL || "https://fall-unavailable-resistant-moving.trycloudflare.com"; //using temp cloudlfare tunnel
+// const API_URL = import.meta.env.VITE_API_URL || "http://10.3.0.68:8000";
+const API_URL = import.meta.env.VITE_API_URL || "https://m67kummn2c.execute-api.eu-west-2.amazonaws.com/test1"; //using temp cloudlfare tunnel
 
 export async function getRoot() {
   const response =  await fetch(`${API_URL}/`);
@@ -31,7 +31,30 @@ export async function downloadDocument(filename) {
   }
 }
 
+export async function getBuckets() {
+  const response = await fetch(`${API_URL}/buckets`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch buckets');
+  }
+  return await response.json();
+}
 
+export async function uploadFile(file, modelType) {
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('model_type', modelType);
+
+  const response = await fetch(`${API_URL}/speech`, {
+    method: "POST",
+    body: formData,
+  });
+
+  if (!response.ok) {
+    throw new Error('File upload failed');
+  }
+
+  return await response.text();
+}
 
 
 
