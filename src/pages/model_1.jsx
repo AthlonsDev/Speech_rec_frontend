@@ -24,6 +24,7 @@ export default function Model_1(){
         {/* Load model API */}
 
         <CardFile text={data} setTranscription={handleSetTranscription}/>
+        <CardForm></CardForm>
         </>
     );
 };

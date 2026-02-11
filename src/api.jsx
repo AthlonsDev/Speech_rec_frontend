@@ -22,13 +22,25 @@ export async function getSpeech(features) {
 
 }
 
+// export async function downloadDocument(filename) {
+//   const response = await fetch(`${API_URL}/download`, {
+//     method: "POST",
+//     headers: { "Content-Type": "application/json" },
+//     body: encodeURIComponent(filename),
+//   });
+//   return await response.blob();
+// }
+
 export async function downloadDocument(filename) {
-  const response = await fetch(`${API_URL}/download/${filename}`);
+  const response = await fetch(`${API_URL}/download/${encodeURIComponent(filename)}`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+    // body: JSON.stringify({ filename }),
+  });
   if (!response.ok) {
-    throw new Error('Document download failed');
-  } else {
-    return await response.blob();
+    throw new Error('File download failed');
   }
+  return await response.blob();
 }
 
 export async function getBuckets() {

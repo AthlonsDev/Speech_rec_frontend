@@ -31,16 +31,14 @@ const CardForm = ({ onSend }) => {
     <Card className="shadow-sm">
       <Card.Body>
         <div class='text-center'>
-        <Card.Title>Card</Card.Title>
+        <Card.Title>Enter Transcript</Card.Title>
           <div class='input-group mb-3'>
-            <input type='text' class='form-control' placeholder='Search' aria-describedby='button-addon2' value={inputValue} onChange={handleInputChange}/>
-            <button type='button' class='btn btn-outline-success' id='button-addon2' onClick={handleInputButtonClick}>Send</button>
+            {/* <input type='text' class='form-control' placeholder='Search' aria-describedby='button-addon2' value={inputValue} onChange={handleInputChange}/> */}
+            <textarea class='form-control' placeholder='Search' aria-describedby='button-addon2' value={inputValue} onChange={handleInputChange} rows={3}/>
+            {/* <button type='button' class='btn btn-outline-success' id='button-addon2' onClick={handleInputButtonClick}>Generate</button> */}
           </div>
-          <h4 class='text-center'>Search By</h4>
           <div class="hstack gap-5 justify-content-center">
-            <button class={`btn btn-outline-success ${searchType === 'Title' ? 'active' : ''}`} role="button" data-bs-toggle="button" aria-selected={searchType === "Title"} onClick={handleButtonClick}>Title</button>
-            <button class={`btn btn-outline-success ${searchType === 'Author' ? 'active' : ''}`} data-bs-toggle="button" aria-selected={searchType === "Author"} onClick={handleButtonClick}>Author</button>
-            <button class={`btn btn-outline-success ${searchType === 'Content' ? 'active' : ''}`} onClick={handleButtonClick}>Content</button>
+            <button class='btn btn-outline-success active' data-bs-toggle="button" onClick={handleInputButtonClick}>Generate Doc</button>
           </div>
         </div>
       </Card.Body>

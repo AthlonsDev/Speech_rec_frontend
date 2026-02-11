@@ -37,6 +37,7 @@ export default function Home() {
                         {query?.map((item, index) => (
                             <div key={index}>
                                     <CardItem data={item ? item :"Loading..." } onSend={handleSend}/>
+                                    <CardForm onSend={handleSend} />
                             </div>
                         ))}
                     </div>
