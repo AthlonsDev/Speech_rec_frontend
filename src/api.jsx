@@ -1,6 +1,6 @@
 // const API_URL = import.meta.env.VITE_API_URL || "http://10.3.0.68:8000";
-// const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000"; //using temp cloudlfare tunnel
-const API_URL = import.meta.env.VITE_API_URL || "https://m67kummn2c.execute-api.eu-west-2.amazonaws.com/test1"; //using temp cloudlfare tunnel
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000"; //using temp cloudlfare tunnel
+// const API_URL = import.meta.env.VITE_API_URL || "https://m67kummn2c.execute-api.eu-west-2.amazonaws.com/test1"; //using temp cloudlfare tunnel
 
 
 export async function getRoot() {
