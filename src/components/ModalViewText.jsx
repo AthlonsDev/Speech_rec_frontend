@@ -5,6 +5,7 @@ import { downloadDocument } from "../api";
 
 
 
+
 const ModalViewText = (data) => {
 
     const handleClick = (item) => {
@@ -16,21 +17,20 @@ const ModalViewText = (data) => {
                 const API_URL = import.meta.env.VITE_API_URL || "https://m67kummn2c.execute-api.eu-west-2.amazonaws.com/test1";
                 // const response = await fetch(`${API_URL}/download/${encodeURIComponent(item)}`);
                 const response = await fetch(`${API_URL}/download/${encodeURIComponent(item)}`);
-                if (!response.ok) {
-                    throw new Error('File download failed');
-                }
-                console.log(`Response: ${response}`);
+                const url = await response.text();
+                console.log(url);
+                // console.log(`Response: ${response.text()}`);
                 // console.log(`File downloaded successfully: ${item}`);
                 // const blob = await response.blob();
                 // // create a link to download the file
                 // const url = window.URL.createObjectURL(blob);
-                // const link = document.createElement('a');
-                // link.href = url;
-                // link.setAttribute('download', item); //or any other extension
-                // link.download = item;
-                // document.body.appendChild(link);
-                // link.click();
-                // link.remove();
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', item); //or any other extension
+                link.download = item;
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
             } catch (error) {
                 console.error('Error downloading file:', error);
             }
