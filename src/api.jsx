@@ -56,7 +56,7 @@ export async function uploadFile(file, modelType) {
 }
 
 export async function generateDoc(text) {
-  const response = await fetch(`${API_URL}/meeting-minutes`, {
+  const response = await fetch(`${API_URL}/gendoc/${encodeURIComponent(text)}`, {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({ text }),});
