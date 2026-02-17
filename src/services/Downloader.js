@@ -1,12 +1,11 @@
-
+import { downloadDocument } from "../api";
 
 export function fileDownloader(item) {
     // send  request to backend to download file
     return async () => {
         try {
             // call to API to download file
-            const API_URL = import.meta.env.VITE_API_URL || "https://m67kummn2c.execute-api.eu-west-2.amazonaws.com/test1";
-            const response = await fetch(`${API_URL}/download/${encodeURIComponent(item)}`); //endpoint response
+            const response = await downloadDocument(item);
             const url = await response.text(); //endpoint response is a URL to the file in S3
             console.log(url);
             const link = document.createElement('a'); //create link element

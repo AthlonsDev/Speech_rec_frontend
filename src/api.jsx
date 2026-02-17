@@ -1,6 +1,6 @@
 // const API_URL = import.meta.env.VITE_API_URL || "http://10.3.0.68:8000";
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000"; //using temp cloudlfare tunnel
-// const API_URL = import.meta.env.VITE_API_URL || "https://m67kummn2c.execute-api.eu-west-2.amazonaws.com/test1"; //using temp cloudlfare tunnel
+// const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000"; //using temp cloudlfare tunnel
+const API_URL = import.meta.env.VITE_API_URL || "https://bwzro20307.execute-api.eu-west-2.amazonaws.com/Stage_01"; //using temp cloudlfare tunnel
 
 
 export async function getRoot() {
@@ -24,25 +24,10 @@ export async function getSpeech(features) {
 
 }
 
-// export async function downloadDocument(filename) {
-//   const response = await fetch(`${API_URL}/download`, {
-//     method: "POST",
-//     headers: { "Content-Type": "application/json" },
-//     body: encodeURIComponent(filename),
-//   });
-//   return await response.blob();
-// }
 
 export async function downloadDocument(filename) {
-  const response = await fetch(`${API_URL}/download/${encodeURIComponent(filename)}`, {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-    // body: JSON.stringify({ filename }),
-  });
-  if (!response.ok) {
-    throw new Error('File download failed');
-  }
-  return await response.blob();
+  const response = await fetch(`${API_URL}/download/${encodeURIComponent(filename)}`);
+  return response;
 }
 
 export async function getBuckets() {
