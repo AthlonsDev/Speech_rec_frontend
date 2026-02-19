@@ -9,7 +9,6 @@ import GraphicEqIcon from '@mui/icons-material/GraphicEq';
 // import { createTheme } from "../services/CreateTheme";
 
 import { startServer } from "../api";
-import { wait } from "@testing-library/user-event/dist/types/utils";
 
 export default function AudioComponent({ send, darkMode }) {
     const [file, setFile] = useState(null);
