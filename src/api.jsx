@@ -1,6 +1,7 @@
 // const API_URL = import.meta.env.VITE_API_URL || "http://10.3.0.68:8000";
 // const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000"; //using temp cloudlfare tunnel
-const API_URL = import.meta.env.VITE_API_URL || "https://bwzro20307.execute-api.eu-west-2.amazonaws.com/Stage_01"; //using temp cloudlfare tunnel
+// const API_URL = import.meta.env.VITE_API_URL || "https://bwzro20307.execute-api.eu-west-2.amazonaws.com/Stage_01";
+const API_URL = import.meta.env.VITE_API_URL || "https://m67kummn2c.execute-api.eu-west-2.amazonaws.com/test1";
 
 
 export async function getRoot() {
@@ -66,20 +67,13 @@ export async function generateDoc(text) {
   return await response.text(); }
 
 
-
-
-
-
-
-
-
-
-export async function getSearch(features) {
-  const response = await fetch(`${API_URL}/search`, {
+export async function startServer() {
+  const response = await fetch(`${API_URL}/start`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ features }),
   });
+  if (!response.ok) {
+    throw new Error('Failed to start server');
+  }
   return await response.json();
 }
 

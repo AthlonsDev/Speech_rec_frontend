@@ -7,6 +7,8 @@ import { fileDownloader } from "../services/Downloader";
 import CloseIcon from '@mui/icons-material/Close';
 // import { createTheme } from "../services/CreateTheme";
 
+import { startServer } from "../api";
+
 export default function AudioComponent({ send, darkMode }) {
     const [file, setFile] = useState(null);
     const [transcription, setTrascription] = useState(null);
@@ -65,6 +67,22 @@ export default function AudioComponent({ send, darkMode }) {
         if (!transcription) return;
         fileDownloader(transcription);
     }
+
+    const startInstance = async () => {
+        try {
+            console.log('Starting server...');
+            const response = await startServer();
+            if (response.ok) {
+                console.log('Server started successfully');
+            }
+        } catch (error) {
+            console.error('Error starting server:', error);
+        }
+    }
+
+    useEffect(() => {
+        startInstance();
+    }, []);
         
         
     return (
