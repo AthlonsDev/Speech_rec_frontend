@@ -5,9 +5,10 @@ import VoiceChatIcon from '@mui/icons-material/VoiceChat';
 import BackupIcon from '@mui/icons-material/Backup';
 import { fileDownloader } from "../services/Downloader";
 import CloseIcon from '@mui/icons-material/Close';
+import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 
 
-export default function TextComponent({ send }) {
+export default function TextComponent({ send, darkMode }) {
     const [inputValue, setInputValue] = useState([""]);
     const [text, setText] = useState("Title")
     const [file, setFile] = useState(null);
@@ -40,24 +41,26 @@ export default function TextComponent({ send }) {
 
     return (
         <>
-            <div className='text-center mt-12'>
-                <div className="flex justify-center"></div>
-                <textarea className='form-control' placeholder='Enter text to generate document' aria-describedby='button-addon2' value={inputValue} onChange={handleInputChange}/>
-                <br />
-                <Button variant="contained" onClick={handleButtonClick}>Generate Document</Button>
-            </div>
-            <div className="text-center mt-4">
-            {loading && <div className="text-center mt-4">Processing audio...</div>}
-                {!transcription && (
-                    <div className="mt-4 p-4 ">
-                        <Button startIcon={<BackupIcon />} size='large' variant="outlined" color="primary" onClick={handleDownload}>Download Document</Button>
+            <div className={`mx-auto p-4 text-center h-screen ${darkMode ? 'bg-gray-900 text-white' : 'bg-white text-black'}`}>  
+                    <TextSnippetIcon style={{ fontSize: 100 }} />
+                <div className='text-center mt-12'>
+                    <div className="flex justify-center"></div>
+                    <textarea className='form-control' placeholder='Enter text to generate document' aria-describedby='button-addon2' value={inputValue} onChange={handleInputChange}/>
+                    <br />
+                    <Button variant="contained" onClick={handleButtonClick}>Generate Document</Button>
+                </div>
+                <div className="text-center mt-4">
+                {loading && <div className="text-center mt-4">Processing audio...</div>}
+                    {!transcription && (
+                        <div className="mt-4 p-4 ">
+                            <Button startIcon={<BackupIcon />} size='large' variant="outlined" color="primary" onClick={handleDownload}>Download Document</Button>
+                        </div>
+                    )}
+                    <div>
+                        <Button startIcon={<CloseIcon />} className="bg-red-500 hover:bg-red-600 text-white text-center" size='large' variant="contained" color="error" onClick={() => sendDataToParent('home')}>Close</Button>
                     </div>
-                )}
-                <div>
-                    <Button startIcon={<CloseIcon />} className="bg-red-500 hover:bg-red-600 text-white text-center" size='large' variant="contained" color="error" onClick={() => sendDataToParent('home')}>Close</Button>
                 </div>
             </div>
-
         </>
 
     );

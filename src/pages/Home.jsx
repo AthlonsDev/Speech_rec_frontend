@@ -26,16 +26,16 @@ export default function Home() {
         setQuery(resArray);
     };
 
-    // useEffect(() => {
-    //     const res = getBuckets()
-    //     .then(data => {
-    //       console.log('Buckets fetched successfully:', data);
-    //       setBucket(data);
-    //     })
-    //     .catch(error => {
-    //       console.error('Error fetching buckets:', error);
-    //     });
-    //   }, []);
+    useEffect(() => {
+        const res = getBuckets()
+        .then(data => {
+          console.log('Buckets fetched successfully:', data);
+          setBucket(data);
+        })
+        .catch(error => {
+          console.error('Error fetching buckets:', error);
+        });
+      }, []);
 
     const handlePageFlow = (e) => {
         console.log('Page flow event received:', e.edit);
@@ -56,28 +56,36 @@ export default function Home() {
     return (
         <>
         {/* Home Page */}
-        <div className={`mx-auto p-4 text-center h-screen ${darkMode ? 'bg-gray-900 text-white' : 'bg-white text-black'}`}>
-            <button className='absolute top-4 right-4 p-2 bg-gray-400 border rounded hover:cursor-pointer hover:bg-gray-400 transition-colors duration-300' 
+        <div className={`mx-auto p-4 text-center h-screen*2 ${darkMode ? 'bg-gray-900 text-white' : 'bg-white text-black'}`}>
+            <button className='absolute fixed top-4 right-4 p-2 bg-gray-400 border rounded hover:cursor-pointer hover:bg-gray-400 transition-colors duration-300' 
                 onClick={() => setDarkMode(!darkMode)}>{darkMode ? <LightModeIcon /> : <DarkModeIcon />}
             </button>
             <div className={` flex flex-col items-center h-screen p-4 ${selected === 'home' ? '' : 'hidden'}`}>
                 <h1 className="text-2xl font-bold mb-4 text-center">Home</h1>
+                    {buckets ? (
+                        <div>
+                            <ModalViewText text={buckets} />
+                        </div>
+                    ) : (
+                        <div className="d-flex justify-content-center">
+                            <div className="spinner-border" role="status" aria-hidden="true"></div>
+                        </div>
+                    )}
+                    
                 <br />
-                    <ModalViewText text={["Document 1: This is the content of document 1.", "Document 2: This is the content of document 2."]} />
-                <br />
-                <div className={`rounded-lg mt-4 p-4 text-center hover:bg-gray-400 transition-colors duration-300 hover:cursor-pointer flex flex-col items-center ${darkMode ? 'bg-gray-600 text-white' : 'bg-gray-300 text-black'}`} onClick={() => handlePageFlow('audio')}>
+                <div className={`rounded-lg w-1/2 mt-4 p-8 text-center hover:bg-gray-400 transition-colors duration-300 hover:cursor-pointer flex flex-col items-center ${darkMode ? 'bg-gray-600 text-white' : 'bg-gray-300 text-black'}`} onClick={() => handlePageFlow('audio')}>
                     {/* <button className="font-bold p-4 bg-gray-400 rounded-lg text-white hover:cursor-pointer hover:bg-gray-200">Upload Audio</button> */}
                         <Button color="primary" aria-label="upload a file" size='large'>
-                            <VoiceChatIcon />
+                            <VoiceChatIcon style={{ fontSize: 50 }} />
                         </Button>
-                        <p>Upload Audio</p>
+                        <h3>Audio</h3>
                 </div>
                 <br />
-                <div className={`rounded-lg mt-4 p-4 text-center hover:bg-gray-400 transition-colors duration-300 hover:cursor-pointer ${darkMode ? 'bg-gray-600 text-white' : 'bg-gray-300 text-black'}`} onClick={() => handlePageFlow('text')}>
+                <div className={`rounded-lg w-1/2 mt-4 p-8 text-center hover:bg-gray-400 transition-colors duration-300 hover:cursor-pointer ${darkMode ? 'bg-gray-600 text-white' : 'bg-gray-300 text-black'}`} onClick={() => handlePageFlow('text')}>
                     <Button color="primary" aria-label="process text/transcription" size='large'>
-                        <TextSnippetIcon />
+                        <TextSnippetIcon style={{ fontSize: 50 }} />
                     </Button>
-                    <p>Process Text/Transcription</p>
+                    <h3>Text</h3>
                 </div>
             </div>
 

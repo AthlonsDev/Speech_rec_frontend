@@ -74,7 +74,9 @@ export async function startServer() {
   if (!response.ok) {
     throw new Error('Failed to start server');
   }
-  return await response.json();
+  if (response.status === 200) {
+    return response;
+  }
 }
 
 

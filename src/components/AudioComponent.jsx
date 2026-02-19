@@ -5,9 +5,11 @@ import VoiceChatIcon from '@mui/icons-material/VoiceChat';
 import BackupIcon from '@mui/icons-material/Backup';
 import { fileDownloader } from "../services/Downloader";
 import CloseIcon from '@mui/icons-material/Close';
+import GraphicEqIcon from '@mui/icons-material/GraphicEq';
 // import { createTheme } from "../services/CreateTheme";
 
 import { startServer } from "../api";
+import { wait } from "@testing-library/user-event/dist/types/utils";
 
 export default function AudioComponent({ send, darkMode }) {
     const [file, setFile] = useState(null);
@@ -71,24 +73,45 @@ export default function AudioComponent({ send, darkMode }) {
     const startInstance = async () => {
         try {
             console.log('Starting server...');
+            setLoading(true);
             const response = await startServer();
+            console.log('Server response:', response);
             if (response.ok) {
                 console.log('Server started successfully');
+                wait(5000); // wait for 5 seconds to ensure server is ready before allowing uploads
+                setLoading(false);
             }
         } catch (error) {
             console.error('Error starting server:', error);
         }
     }
 
-    useEffect(() => {
-        startInstance();
-    }, []);
+    // useEffect(() => {
+    //     startInstance();
+    // }, []);
         
         
     return (
         <>
-            <div className={`mx-auto p-4 text-center h-screen ${darkMode ? 'bg-gray-900 text-white' : 'bg-white text-black'}`}>
+        {/* Loading with backdrop */}
+            {loading && (
+            <div className='absolute top-0 left-0 fixed z-10 h-screen w-screen text-center backdrop-blur-sm md:backdrop-blur-md bg-white/30'>
+                <h2>Starting the Audio Processing Server...</h2>
+                <div>
+                    {!loading &&
+                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 scale-150">
+                            <div className="spinner-border" role="status" aria-hidden="true"></div>
+                        </div>
+                    }
+                </div>
+            </div>
+            )}
+        {/* File Upload */}
+            <div className={`mx-auto p-4 text-center h-screen ${darkMode ? 'bg-gray-900 text-white' : 'bg-white text-black'}`}>  
+                <VoiceChatIcon style={{ fontSize: 100 }} />
+
                 <div className="hstack gap-5 justify-content-center">
+                    
                     <input className={`form-control  rounded-lg mt-4 p-4 text-center hover:bg-gray-400 transition-colors duration-300 hover:cursor-pointer flex flex-col items-center`} type="file" id="formFile" onChange={handleFileChange}/>
                     {/* <button type='button ' className='btn btn-outline-success btn-lg' onClick={handleUpload}>Upload</button> */}
                 </div>
