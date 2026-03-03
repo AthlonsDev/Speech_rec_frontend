@@ -5,6 +5,11 @@
   "type": "module",
   "dependencies": {
     "@aws-sdk/client-s3": "^3.933.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^7.3.8",
+    "@mui/material": "^7.3.8",
+    "@tailwindcss/vite": "^4.2.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
@@ -15,6 +20,7 @@
     "react-bootstrap": "^2.10.10",
     "react-dom": "^18.2.0",
     "react-router-dom": "^7.9.6",
+    "tailwindcss": "^4.2.0",
     "vite-plugin-cloudflare": "^0.4.1",
     "web-vitals": "^3.1.0"
   },
