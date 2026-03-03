@@ -74,10 +74,10 @@ export default function AudioComponent({ send, darkMode }) {
         try {
             console.log('Starting server...');
             setLoading(true);
-            // const response = await startServer();
+            const response = await startServer();
             // console.log('Server response:', response);
 
-            const response = {ok: true}; // Simulating a successful server start response
+            // const response = {ok: true}; // Simulating a successful server start response
             if (response.ok) {
                 console.log('Server started successfully');
                 wait(5000); // wait for 5 seconds to ensure server is ready before allowing uploads
