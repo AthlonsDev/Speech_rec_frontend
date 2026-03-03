@@ -61,7 +61,7 @@ export default function Home() {
                 onClick={() => setDarkMode(!darkMode)}>{darkMode ? <LightModeIcon /> : <DarkModeIcon />}
             </button>
             <div className={` flex flex-col items-center h-screen p-4 ${selected === 'home' ? '' : 'hidden'}`}>
-                <h1 className="text-2xl font-bold mb-4 text-center">Home</h1>
+                <h1 className="text-2xl font-bold mb-4 text-center"><VoiceChatIcon style={{ fontSize: 70 }} /> Home</h1>
                     {buckets ? (
                         <div>
                             <ModalViewText text={buckets} />

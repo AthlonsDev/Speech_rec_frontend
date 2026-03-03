@@ -53,7 +53,8 @@ export default function AudioComponent({ send, darkMode }) {
             console.error('Error uploading file:', err);
             throw err; // re-throw to be caught by outer catch
           });
-          
+        //   Set transcription to data linked to doc
+        //   const data = "path://"
           setTrascription(data);
           setLoading(false);
           console.log('File uploaded successfully:', data);
@@ -73,8 +74,10 @@ export default function AudioComponent({ send, darkMode }) {
         try {
             console.log('Starting server...');
             setLoading(true);
-            const response = await startServer();
-            console.log('Server response:', response);
+            // const response = await startServer();
+            // console.log('Server response:', response);
+
+            const response = {ok: true}; // Simulating a successful server start response
             if (response.ok) {
                 console.log('Server started successfully');
                 wait(5000); // wait for 5 seconds to ensure server is ready before allowing uploads
@@ -85,9 +88,9 @@ export default function AudioComponent({ send, darkMode }) {
         }
     }
 
-    // useEffect(() => {
-    //     startInstance();
-    // }, []);
+    useEffect(() => {
+        startInstance();
+    }, []);
         
         
     return (
